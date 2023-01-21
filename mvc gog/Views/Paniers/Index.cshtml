@@ -1,0 +1,67 @@
+﻿@model IEnumerable<mvc_gog.Models.Panier>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h1>CARTS</h1>
+                    <hr/>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NbreArticle)
+            </th> 
+            <th>
+                @Html.DisplayNameFor(model => model.Prdname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NbreArticle)
+            </td>  
+            <td>
+                @Html.DisplayFor(modelItem => item.Prdname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+
+
+
+
+
+                  <a asp-action="Edit" asp-route-id="@item.PanierID"> <input type="submit" value="Edit" class="btn btn-warning" /></a> |
+                                        <a asp-action="Details" asp-route-id="@item.PanierID"> <input type="button" class="btn btn-primary" value="Details"></a> |
+                                        <a asp-action="Delete" asp-route-id="@item.PanierID"> <input type="button" class="btn btn-danger" value="Delete"></a> 
+
+
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                

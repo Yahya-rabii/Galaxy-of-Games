@@ -1,0 +1,103 @@
+﻿@model mvc_gog.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="https://icon-library.com/images/gog-galaxy-icon/gog-galaxy-icon-15.jpg" class="img">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">Register</h4>
+
+
+                        <form asp-action="Register" method="POST" class="my-login-validation" novalidate="">
+                            <div class="form-group">
+                                <label asp-for="Email">E-Mail Address</label>
+                                <input asp-for="BirthDate" id="email" type="email" rounded-pill" name="email" value="" required autofocus class="form-control text-light" style="background-color: transparent; border: 1px solid white">
+                                <div class="invalid-feedback">
+                                    Email is invalid
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label label asp-for="Password">Password </label>
+                                <input asp-for="BirthDate" id="password" type="password" class="form-control text-light" style="background-color: transparent; border: solid white" rounded-pill" name="password" required data-eye>
+                                <div class="invalid-feedback"> Password is required </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label label asp-for="FirstName">FirstName </label>
+                                <input asp-for ="BirthDate" id="FirstName" type="text" class="form-control text-light" style="background-color: transparent; border: solid white" rounded-pill" name="FirstName" required data-eye>
+                                <div class="invalid-feedback"> FirstName is required </div>
+                            </div>  
+                            
+                            <div class="form-group">
+                                <label label asp-for="LastName">FirstName </label>
+                                <input asp-for="BirthDate" id="LastName" type="text" class="form-control text-light" style="background-color: transparent; border: solid white" rounded-pill" name="LastName" required data-eye>
+                                <div class="invalid-feedback"> LastName is required </div>
+                            </div>
+
+                                   <div class="form-group">
+
+                                <label asp-for="BirthDate" class="control-label"></label>
+                                <input asp-for="BirthDate" id="BirthDate" class="form-control text-light" style="background-color: transparent; border: solid white" rounded-pill" name="BirthDate" required data-eye />
+                                <div class="invalid-feedback"> BirthDate is required </div>
+                            </div>
+
+
+                    
+
+                            <div class="form-group">
+                                <input type="submit" value="Register" class="btn btn-primary" />
+                            </div>
+
+                            <div class="mt-4 text-center">
+                               Already have an account? <a asp-action="Login"> <input type="button" class="btn btn-dark" value="Register"></a>
+                            </div>
+
+
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

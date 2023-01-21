@@ -1,0 +1,28 @@
+﻿@model mvc_gog.Models.User
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!-- Content Code -->
+
+@if (User.Identity.IsAuthenticated)
+                    {
+    <div class="text-center">
+	<div class="container">
+			<div class="InnerDiv">
+				<div class="center">
+					<p class="title">GOD of GAMES</p>
+				<p class="sub_des">Games don't make you violent, lag does.</p>
+					<div class="btns">
+						<button>Subscribe</button>
+					</div>
+				</div>
+			</div>
+		</div>
+        </div>
+		 <!--Content Code End -->
+
+					}

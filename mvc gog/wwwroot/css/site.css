@@ -1,0 +1,305 @@
+html {
+  font-size: 14px;
+  
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    background-image: url(Images/ASSA.jpg);
+    background-attachment: fixed;
+    object-fit: cover;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+* {
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    object-fit: cover;
+    align-items: center;
+}
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+
+
+.form-holder {
+    display: contents;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    text-align: left;
+    min-height: 100vh;
+}
+.form-holder h1{
+  color : white;
+}
+
+    .form-holder .form-content {
+        position: relative;
+        text-align: center;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-align-items: center;
+        align-items: center;
+        padding: 60px;
+    }
+
+.form-content .form-items {
+    border: 3px solid #fff;
+    padding: 40px;
+    display: inline-block;
+    width: 100%;
+    min-width: 540px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(20px);
+}
+
+.form-content h3 {
+    color: gray;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+
+
+}
+
+    .form-content h3.form-title {
+        margin-bottom: 30px;
+
+
+    }
+
+.form-content p {
+    color: #fff;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 30px;
+
+
+}
+
+
+.form-content label, .was-validated .form-check-input:invalid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
+    color: #fff;
+    text-align:left;
+
+
+}
+
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+    width: 100%;
+    padding: 9px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+
+
+}
+
+
+.btn-primary {
+    background-color: #6C757D;
+    outline: none;
+    border: 0px;
+    box-shadow: none;
+}
+
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+        background-color: darkslategrey;
+        outline: none !important;
+        border: none !important;
+        box-shadow: none;
+
+
+        
+    }
+
+.form-content textarea {
+    position: static !important;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    outline: none;
+    resize: none;
+    height: 120px;
+    -webkit-transition: none;
+    transition: none;
+    margin-bottom: 14px;
+
+
+}
+
+    .form-content textarea:hover, .form-content textarea:focus {
+        border: 0;
+        background-color: #ebeff8;
+        color: #8D8D8D;
+    }
+
+.mv-up {
+    margin-top: -9px !important;
+    margin-bottom: 8px !important;
+}
+
+.invalid-feedback {
+    color: #ff606e;
+}
+
+.valid-feedback {
+    color: #2acc80;
+}
+
+
+
+
+
+
+
+
+
+.box-login {
+    width: 30em;
+    height: 35em;
+    margin: auto;
+    margin-top: 3em;
+    border: solid RGB(139, 155, 167);
+    border-radius: 0.5em;
+    background-image: linear-gradient(RGB(143, 168, 153), RGB(168, 143, 158));
+}
+
+.box-shadow {
+    -moz-box-shadow: 4px 4px 4px 4px #808080;
+    -webkit-box-shadow: 4px 4px 4px 4px #808080;
+    box-shadow: 4px 4px 4px 4px #808080;
+}
+
+.box-login h1 {
+    text-align: center;
+    font-size: 3em;
+    font-family: "Bungee Shade", sans-serif;
+}
+
+.login-form {
+    height: 50%;
+    width: 50%;
+    margin: auto;
+}
+
+    .login-form div {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+    }
+
+.box-user {
+    height: 120px;
+    justify-content: space-around;
+}
+
+    .box-user input {
+        background: transparent;
+        font-size: 1.3em;
+        border: none;
+        border-bottom: solid;
+        border-radius: 2px;
+        color: RGB(76, 78, 78);
+    }
+
+        .box-user input::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: white;
+            opacity: 1; /* Firefox */
+            padding-left: 0.1em;
+        }
+
+        .box-user input:-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: RGB(162, 180, 192);
+            padding-left: 0.1em;
+        }
+
+        .box-user input{
+            /* Microsoft Edge */
+            color: RGB(162, 180, 192);
+            padding-left: 0.1em;
+        }
+
+.box-btn {
+    height: 80px;
+    justify-content: end;
+    align-items: center;
+}
+
+button {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    border-color: RGB(181, 200, 214);
+    color: white;
+    background: RGBA(139, 155, 167);
+}
+
+    button:hover {
+        box-shadow: 2px 2px 2px 2px #808080;
+    }
+
+
+
+
+
+.auto-width {
+    align-items: center;
+
+    width: 70px; /* initial width */
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.disp{
+    display: inline-block;
+}

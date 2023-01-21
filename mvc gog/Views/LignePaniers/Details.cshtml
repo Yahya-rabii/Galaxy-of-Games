@@ -1,0 +1,36 @@
+﻿@model mvc_gog.Models.LignePanier
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>LignePanier</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Qte)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Qte)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.produit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.produit.ProduitID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.panier)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.panier.PanierID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.LignePanierID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

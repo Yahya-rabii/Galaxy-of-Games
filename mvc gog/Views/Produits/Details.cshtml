@@ -1,0 +1,70 @@
+﻿@model mvc_gog.Models.Produit
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h1>DETAILS</h1>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.imageurl)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.imageurl)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Prodname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Prodname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Dateofcreation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dateofcreation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Datedeproduction)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Datedeproduction)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.desc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.desc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Autor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Autor)
+        </dd>
+                    </dl> 
+                    <a asp-action="Edit" asp-route-id="@Model?.ProduitID" class="btn btn-warning">Edit</a> |
+                    <a asp-action="Index"><input type="button" class="btn btn-dark" value="Back to List" /></a>
+</div>
+<div>
+                  
+    
+
+</div>
+               </div>
+            </div>
+        </div>
+    </div>
+

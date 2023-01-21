@@ -1,0 +1,98 @@
+﻿@model IEnumerable<mvc_gog.Models.Produit>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h1>GAMES</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.imageurl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prodname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dateofcreation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datedeproduction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.desc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+                                <tr >
+            <td>
+                @Html.DisplayFor(modelItem => item.imageurl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prodname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dateofcreation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datedeproduction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.desc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Autor)
+            </td >
+
+
+                                    <td >
+                                        <div class="form-button disp" style="display:flex">
+
+                            <a asp-action="Edit" asp-route-id="@item.ProduitID"> <input type="submit" value="Edit" class="btn btn-warning" /></a> |
+                            <a asp-action="Details" asp-route-id="@item.ProduitID"> <input type="button" class="btn btn-primary" value="Details"></a> |
+                            <a asp-action="Delete" asp-route-id="@item.ProduitID"> <input type="button" class="btn btn-danger" value="Delete"></a> |
+                                            <form asp-route-id="@item.ProduitID" method="get" asp-action="AddPanier" style="display:flex">
+                                                <input type="submit" value="Add to cart" class="btn btn-success" />|
+                                                <input class="form-control bg-transparent text-light auto-width" type="number" name="Quantite" placeholder="Quantite" value="1" min="1">
+                                            </form>
+
+                                        </div>
+
+                                    
+            </td>
+
+                               
+
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>

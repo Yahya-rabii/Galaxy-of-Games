@@ -1,0 +1,109 @@
+
+/* BACKGROUND GRADIENT   */
+
+
+.brand {
+    width: 111px;
+    height: 111px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 40px auto;
+    box-shadow: 0 5px 10px rgba(0,0,0,.10);
+    position: relative;
+    z-index: 1;
+    transition: 3s;
+    background: rgba(36,39,52,0.3);
+}
+
+    .brand img {
+        width: 100%;
+    }
+
+.card-wrapper {
+    width: 450px;
+}
+
+.card {
+    border-color: transparent;
+    box-shadow: 0 4px 8px rgba(0,0,0,.05);
+}
+
+    .card.fat {
+        padding: 10px;
+        background: rgba(36,39,52,0.3);
+     
+        border-radius: 35px;
+    }
+
+    .card .card-title {
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+.form-control {
+    border-width: 2.3px;
+}
+
+.form-group label {
+    width: 100%;
+}
+
+.btn.btn-block {
+    padding: 12px 1px;
+}
+
+
+
+@media screen and (max-width: 425px) {
+    .card-wrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .card.fat {
+        padding: 0;
+    }
+
+        .card.fat .card-body {
+            padding: 15px;
+        }
+}
+
+#decoration {
+    text-decoration: none;
+}
+/* JS CLASS FOR ROTATE AVATAR PART ( YOU CAN REMOVE IF YOU DONT LIKE IT :) */
+.hover {
+    transition: 4s;
+    transform: rotate(360deg);
+    position: relative;
+}
+
+
+
+
+
+.LOGOUTbtns button {
+    height: 50px;
+    width: 150px;
+    border-radius: 50px;
+    border: 2px solid #3bbee3;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0 10px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #38deec;
+    background: transparent;
+}
+
+    
+    .LOGOUTbtns button:hover {
+        background-image: linear-gradient(to right, #3f8cd6, #38deec);
+        color: #000;
+    }

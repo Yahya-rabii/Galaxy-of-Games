@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GOD of GAMES </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/card.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Ink&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+
+
+
+
+    <div class="wrapper">
+
+        <!-- Top Header Code -->
+        <nav>
+            <div class="menu">
+                <!-- logo -->
+                <div class="logo">
+                    <img src="~/css/Images/GodLogo.png" />
+                </div>
+
+                <!-- Menu Bar Code -->
+                <input type="checkbox" id="check">
+                <label for="check" class="checkbtn">
+                    <i class="fas fa-bars"></i>
+                </label>
+                <ul>
+                    <li>
+                        <div class="MobNavBtns">
+                            <button>Play Now</button>
+                        </div>
+                    </li>
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("admin"))
+                        {
+
+                            <li> <a class="nav-link " asp-area="" asp-controller="Produits" asp-action="Index">Games</a></li>
+                            <li> <a class="nav-link " asp-area="" asp-controller="Produits" asp-action="Create">add Games</a></li>        
+
+                            <li> <a class="nav-link " asp-area="" asp-controller="Users" asp-action="Index">Users</a></li>
+                            <li> <a class="nav-link " asp-area="" asp-controller="Users" asp-action="Create">add Users</a></li>
+
+                            <li> <a class="nav-link " asp-area="" asp-controller="Paniers" asp-action="Index">Cart</a></li>
+                            <li> <a class="nav-link " asp-area="" asp-controller="Paniers" asp-action="Create">add Cart</a></li>
+
+                            <li> <a class="nav-link " asp-area="" asp-controller="LignePaniers" asp-action="Index"> cart list</a></li> 
+                            <li> <a class="nav-link " asp-area="" asp-controller="LignePaniers" asp-action="Index">Add cart list</a></li>
+
+                            <li class="LOGOUTbtns"> <button><a class="nav-link" asp-area="" asp-controller="Users" asp-action="Logout"> Logout </a></button> </li>
+
+
+                        }
+                        @if (User.IsInRole("user"))
+                        {
+
+                            <li> <a class="nav-link " asp-area="" asp-controller="Produits" asp-action="List">Games</a></li>
+                            <li> <a class="nav-link " asp-area="" asp-controller="Paniers" asp-action="Index">Cart</a></li>
+
+                            <li class="LOGOUTbtns"> <button><a class="nav-link" asp-area="" asp-controller="Users" asp-action="Logout"> Logout </a></button> </li>
+
+                        }
+                    }
+
+                   
+                   
+
+                </ul>
+                <!-- Menu Bar Code End -->
+                <!-- Header Button Code -->
+         
+                <!-- Header Button Code End -->
+            </div>
+        </nav>
+        <!-- Top Header Code End -->
+
+
+    </div>
+
+
+    <div class="row d-flex justify-content-center ">
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+
+    </div>
+
+
+    <footer class="myfooter footer-distributed">
+
+        <div class="footer-right">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+
+        </div>
+
+        <div class="footer-left">
+
+            <p class="footer-links">
+
+                <a asp-area="" asp-page="/index">Home</a>
+                <a asp-area="" asp-page="/Privacy">Privacy</a>
+                <a asp-area="" asp-page="/Produits/produits_list">Games</a>
+                <a asp-area="" asp-page="/personne/listpersonne">Personne</a>
+                <a asp-area="" asp-page="/Admin/index">Admin</a>
+                <a asp-area="" asp-page="/Admin2/index">add Personne</a>
+            </p>
+
+            <p>Play House &copy; 2022</p>
+        </div>
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/login.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
