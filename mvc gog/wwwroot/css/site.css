@@ -1,17 +1,16 @@
 html {
-  font-size: 14px;
-  
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -23,6 +22,7 @@ body {
     background-position: center;
     background-size: cover;
 }
+
 * {
     color: white;
     margin: 0px;
@@ -48,9 +48,10 @@ body {
     text-align: left;
     min-height: 100vh;
 }
-.form-holder h1{
-  color : white;
-}
+
+    .form-holder h1 {
+        color: white;
+    }
 
     .form-holder .form-content {
         position: relative;
@@ -88,14 +89,10 @@ body {
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 5px;
-
-
 }
 
     .form-content h3.form-title {
         margin-bottom: 30px;
-
-
     }
 
 .form-content p {
@@ -105,16 +102,12 @@ body {
     font-weight: 300;
     line-height: 20px;
     margin-bottom: 30px;
-
-
 }
 
 
 .form-content label, .was-validated .form-check-input:invalid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
     color: #fff;
-    text-align:left;
-
-
+    text-align: left;
 }
 
 .form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
@@ -131,8 +124,6 @@ body {
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     margin-top: 16px;
-
-
 }
 
 
@@ -148,9 +139,6 @@ body {
         outline: none !important;
         border: none !important;
         box-shadow: none;
-
-
-        
     }
 
 .form-content textarea {
@@ -170,8 +158,6 @@ body {
     -webkit-transition: none;
     transition: none;
     margin-bottom: 14px;
-
-
 }
 
     .form-content textarea:hover, .form-content textarea:focus {
@@ -262,11 +248,11 @@ body {
             padding-left: 0.1em;
         }
 
-        .box-user input{
-            /* Microsoft Edge */
-            color: RGB(162, 180, 192);
-            padding-left: 0.1em;
-        }
+    .box-user input {
+        /* Microsoft Edge */
+        color: RGB(162, 180, 192);
+        padding-left: 0.1em;
+    }
 
 .box-btn {
     height: 80px;
@@ -293,13 +279,12 @@ button {
 
 .auto-width {
     align-items: center;
-
     width: 70px; /* initial width */
     padding: 5px;
     font-size: 20px;
     text-align: center;
 }
 
-.disp{
+.disp {
     display: inline-block;
 }

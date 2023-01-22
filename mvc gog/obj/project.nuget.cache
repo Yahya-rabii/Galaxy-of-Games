@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+rdqaywWN+9vhhuKMT0H9GF8EIPcPMhFzn4UA3pQO7bUXXL0vClZD6aJPKkDU31HIowT1EqiCeJMhU5acP7U5w==",
+  "dgSpecHash": "srx0tnTNPRuzYSxuxyUWN+B0nogn4BhEfguaBbeeQSZySXY5NB8k1eVDNI5basVScgUxhcU+6rQ66aWp4oY8mw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\yahya\\Desktop\\mvc gog\\mvc gog.csproj",
+  "projectFilePath": "C:\\Users\\yahya\\Desktop\\ggg\\mvc gog\\mvc gog.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yahya\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\yahya\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

@@ -55,11 +55,12 @@
                             <li> <a class="nav-link " asp-area="" asp-controller="Users" asp-action="Index">Users</a></li>
                             <li> <a class="nav-link " asp-area="" asp-controller="Users" asp-action="Create">add Users</a></li>
 
-                            <li> <a class="nav-link " asp-area="" asp-controller="Paniers" asp-action="Index">Cart</a></li>
-                            <li> <a class="nav-link " asp-area="" asp-controller="Paniers" asp-action="Create">add Cart</a></li>
+                            <li> <a class="nav-link " asp-area="" asp-controller="Paniers" asp-action="Index">Carts</a></li>
+                            
 
-                            <li> <a class="nav-link " asp-area="" asp-controller="LignePaniers" asp-action="Index"> cart list</a></li> 
-                            <li> <a class="nav-link " asp-area="" asp-controller="LignePaniers" asp-action="Index">Add cart list</a></li>
+                           @* <li> <a class="nav-link " asp-area="" asp-controller="LignePaniers" asp-action="Index"> cart lists</a></li> *@
+                                
+                           //   /**/  """  """  @**@  <!---->  #  {/* */}
 
                             <li class="LOGOUTbtns"> <button><a class="nav-link" asp-area="" asp-controller="Users" asp-action="Logout"> Logout </a></button> </li>
 
@@ -114,17 +115,29 @@
 
         <div class="footer-left">
 
-            <p class="footer-links">
+          @if (User.Identity.IsAuthenticated)
+            {
+                @if (User.IsInRole("admin"))
+                {
+                    <p class="footer-links">
 
-                <a asp-area="" asp-page="/index">Home</a>
-                <a asp-area="" asp-page="/Privacy">Privacy</a>
-                <a asp-area="" asp-page="/Produits/produits_list">Games</a>
-                <a asp-area="" asp-page="/personne/listpersonne">Personne</a>
-                <a asp-area="" asp-page="/Admin/index">Admin</a>
-                <a asp-area="" asp-page="/Admin2/index">add Personne</a>
-            </p>
+                        <a class="nav-link " asp-area="" asp-controller="Paniers" asp-action="Index">Carts</a>
+                        <a class="nav-link " asp-area="" asp-controller="Produits" asp-action="Index">Games</a>
+                        <a class="nav-link " asp-area="" asp-controller="Users" asp-action="Index">Users</a>
 
-            <p>Play House &copy; 2022</p>
+
+                    </p>
+                }
+                else
+                {
+                    <p class="footer-links">
+                    <a class="nav-link " asp-area="" asp-controller="Paniers" asp-action="Index">Carts</a>
+                    <a class="nav-link " asp-area="" asp-controller="Produits" asp-action="List">Games</a>
+                    </p>
+
+                }
+            }
+            <p>NOXIDEUS &copy; 2023</p>
         </div>
 
     </footer>

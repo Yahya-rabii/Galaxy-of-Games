@@ -30,20 +30,21 @@ namespace mvcgog.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LignePanierID"));
 
+                    b.Property<int>("NbreArticle")
+                        .HasColumnType("int");
+
                     b.Property<int>("PanierID")
                         .HasColumnType("int");
 
                     b.Property<int>("ProduitID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Qte")
-                        .HasColumnType("int");
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
                     b.HasKey("LignePanierID");
 
                     b.HasIndex("PanierID");
-
-                    b.HasIndex("ProduitID");
 
                     b.ToTable("LignePanier");
                 });
@@ -59,16 +60,15 @@ namespace mvcgog.Migrations
                     b.Property<int>("NbreArticle")
                         .HasColumnType("int");
 
-                    b.Property<string>("Prdname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Produit")
-                        .HasColumnType("int");
-
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
+                    b.Property<int?>("UserID")
+                        .HasColumnType("int");
+
                     b.HasKey("PanierID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Panier");
                 });
@@ -84,11 +84,11 @@ namespace mvcgog.Migrations
                     b.Property<string>("Autor")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Datedeproduction")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("Dateofcreation")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("PanierID")
+                        .HasColumnType("int");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
@@ -148,29 +148,23 @@ namespace mvcgog.Migrations
 
             modelBuilder.Entity("mvc_gog.Models.LignePanier", b =>
                 {
-                    b.HasOne("mvc_gog.Models.Panier", "panier")
+                    b.HasOne("mvc_gog.Models.Panier", null)
                         .WithMany("LignePanier")
                         .HasForeignKey("PanierID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("mvc_gog.Models.Produit", "produit")
-                        .WithMany("LignePanier")
-                        .HasForeignKey("ProduitID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("panier");
-
-                    b.Navigation("produit");
                 });
 
             modelBuilder.Entity("mvc_gog.Models.Panier", b =>
                 {
-                    b.Navigation("LignePanier");
+                    b.HasOne("mvc_gog.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("mvc_gog.Models.Produit", b =>
+            modelBuilder.Entity("mvc_gog.Models.Panier", b =>
                 {
                     b.Navigation("LignePanier");
                 });

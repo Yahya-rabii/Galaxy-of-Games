@@ -10,48 +10,46 @@
             <div class="form-content">
                 <div class="form-items">
                     <h1>ADD GAME</h1>
-                    <form asp-action="Create" class="requires-validation">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="col-md-12">
-                <label asp-for="imageurl" class="control-label"></label>
+
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="imageurl" class="control-label"></label>
                             <input asp-for="imageurl" class="form-control text-light" style="background-color: transparent; border: 1px solid white" />
-                <span asp-validation-for="imageurl" class="text-danger"></span>
-            </div>
-                        <div class="col-md-12">
-                <label asp-for="Prodname" class="control-label"></label>
+                            <span asp-validation-for="imageurl" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Prodname" class="control-label"></label>
                             <input asp-for="Prodname" class="form-control text-light" style="background-color: transparent; border: 1px solid white" />
-                <span asp-validation-for="Prodname" class="text-danger"></span>
-            </div>
-                        <div class="col-md-12">
-                <label asp-for="Price" class="control-label"></label>
+                            <span asp-validation-for="Prodname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label"></label>
                             <input asp-for="Price" class="form-control text-light" style="background-color: transparent; border: 1px solid white" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-                        <div class="col-md-12">
-                <label asp-for="Dateofcreation" class="control-label"></label>
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Dateofcreation" class="control-label"></label>
                             <input asp-for="Dateofcreation" class="form-control text-light" style="background-color: transparent; border: 1px solid white" />
-                <span asp-validation-for="Dateofcreation" class="text-danger"></span>
-            </div>
-                        <div class="col-md-12">
-                <label asp-for="Datedeproduction" class="control-label"></label>
-                            <input asp-for="Datedeproduction" class="form-control text-light" style="background-color: transparent; border: 1px solid white" />
-                <span asp-validation-for="Datedeproduction" class="text-danger"></span>
-            </div>
-                        <div class="col-md-12">
-                <label asp-for="desc" class="control-label"></label>
+                            <span asp-validation-for="Dateofcreation" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="desc" class="control-label"></label>
                             <input asp-for="desc" class="form-control text-light" style="background-color: transparent; border: 1px solid white" />
-                <span asp-validation-for="desc" class="text-danger"></span>
-            </div>
-                        <div class="col-md-12">
-                <label asp-for="Autor" class="control-label"></label>
+                            <span asp-validation-for="desc" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Autor" class="control-label"></label>
                             <input asp-for="Autor" class="form-control text-light" style="background-color: transparent; border: 1px solid white" />
-                <span asp-validation-for="Autor" class="text-danger"></span>
-            </div>
+                            <span asp-validation-for="Autor" class="text-danger"></span>
+                        </div>
                         <div class="form-button mt-3">
-                <input type="submit" value="Create" class="btn btn-success" /> |
+                            <input type="submit" value="Create" class="btn btn-success" /> |
                             <a asp-action="Index"> <input type="button" class="btn btn-primary" value="Back to List" /></a>
-            </div>
-        </form>
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
         </div>
@@ -60,5 +58,7 @@
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

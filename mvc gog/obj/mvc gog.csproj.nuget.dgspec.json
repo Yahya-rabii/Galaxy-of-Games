@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yahya\\Desktop\\mvc gog\\mvc gog.csproj": {}
+    "C:\\Users\\yahya\\Desktop\\ggg\\mvc gog\\mvc gog.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yahya\\Desktop\\mvc gog\\mvc gog.csproj": {
+    "C:\\Users\\yahya\\Desktop\\ggg\\mvc gog\\mvc gog.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yahya\\Desktop\\mvc gog\\mvc gog.csproj",
+        "projectUniqueName": "C:\\Users\\yahya\\Desktop\\ggg\\mvc gog\\mvc gog.csproj",
         "projectName": "mvc gog",
-        "projectPath": "C:\\Users\\yahya\\Desktop\\mvc gog\\mvc gog.csproj",
+        "projectPath": "C:\\Users\\yahya\\Desktop\\ggg\\mvc gog\\mvc gog.csproj",
         "packagesPath": "C:\\Users\\yahya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yahya\\Desktop\\mvc gog\\obj\\",
+        "outputPath": "C:\\Users\\yahya\\Desktop\\ggg\\mvc gog\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yahya\\AppData\\Roaming\\NuGet\\NuGet.Config",

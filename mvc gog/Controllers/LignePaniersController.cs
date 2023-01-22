@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,6 @@ using mvc_gog.Models;
 
 namespace mvc_gog.Controllers
 {
-    [Authorize]
     public class LignePaniersController : Controller
     {
         private readonly mvc_gogContext _context;
@@ -24,7 +22,7 @@ namespace mvc_gog.Controllers
         // GET: LignePaniers
         public async Task<IActionResult> Index()
         {
-            var mvc_gogContext = _context.LignePanier.Include(l => l.panier).Include(l => l.produit);
+            var mvc_gogContext = _context.LignePanier.Include(l => l.produit);
             return View(await mvc_gogContext.ToListAsync());
         }
 
@@ -37,7 +35,6 @@ namespace mvc_gog.Controllers
             }
 
             var lignePanier = await _context.LignePanier
-                .Include(l => l.panier)
                 .Include(l => l.produit)
                 .FirstOrDefaultAsync(m => m.LignePanierID == id);
             if (lignePanier == null)
@@ -51,7 +48,6 @@ namespace mvc_gog.Controllers
         // GET: LignePaniers/Create
         public IActionResult Create()
         {
-            ViewData["PanierID"] = new SelectList(_context.Panier, "PanierID", "PanierID");
             ViewData["ProduitID"] = new SelectList(_context.Produit, "ProduitID", "ProduitID");
             return View();
         }
@@ -61,7 +57,7 @@ namespace mvc_gog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LignePanierID,PanierID,ProduitID,Qte")] LignePanier lignePanier)
+        public async Task<IActionResult> Create([Bind("LignePanierID,PanierID,ProduitID,NbreArticle,Total")] LignePanier lignePanier)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +65,6 @@ namespace mvc_gog.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PanierID"] = new SelectList(_context.Panier, "PanierID", "PanierID", lignePanier.PanierID);
             ViewData["ProduitID"] = new SelectList(_context.Produit, "ProduitID", "ProduitID", lignePanier.ProduitID);
             return View(lignePanier);
         }
@@ -87,7 +82,6 @@ namespace mvc_gog.Controllers
             {
                 return NotFound();
             }
-            ViewData["PanierID"] = new SelectList(_context.Panier, "PanierID", "PanierID", lignePanier.PanierID);
             ViewData["ProduitID"] = new SelectList(_context.Produit, "ProduitID", "ProduitID", lignePanier.ProduitID);
             return View(lignePanier);
         }
@@ -97,7 +91,7 @@ namespace mvc_gog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LignePanierID,PanierID,ProduitID,Qte")] LignePanier lignePanier)
+        public async Task<IActionResult> Edit(int id, [Bind("LignePanierID,PanierID,ProduitID,NbreArticle,Total")] LignePanier lignePanier)
         {
             if (id != lignePanier.LignePanierID)
             {
@@ -106,11 +100,45 @@ namespace mvc_gog.Controllers
 
             if (ModelState.IsValid)
             {
+
+
                 try
                 {
-                    _context.Update(lignePanier);
-                    await _context.SaveChangesAsync();
+
+
+                    var existingLignePanier = _context.LignePanier.Include(lp => lp.produit).FirstOrDefault(lp => lp.LignePanierID == id);
+
+
+                    if (existingLignePanier is null) return NotFound();
+
+
+                            existingLignePanier.NbreArticle = lignePanier.NbreArticle;
+                            existingLignePanier.Total = lignePanier.NbreArticle * existingLignePanier.produit.Price;
+
+
+
+
+                            Panier panier = _context.Panier.Include(p=>p.LignePanier).FirstOrDefault(lp => lp.PanierID == existingLignePanier.PanierID);
+
+
+
+                            panier.NbreArticle = panier.LignePanier.Sum(p => p.NbreArticle);
+                            panier.Total = panier.LignePanier.Sum(p => p.Total);
+
+                           
+
+
+
+                            _context.Update(existingLignePanier);
+                            _context.Update(panier);
+
+                            await _context.SaveChangesAsync();
+                        
+                    
                 }
+
+
+
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!LignePanierExists(lignePanier.LignePanierID))
@@ -124,7 +152,6 @@ namespace mvc_gog.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PanierID"] = new SelectList(_context.Panier, "PanierID", "PanierID", lignePanier.PanierID);
             ViewData["ProduitID"] = new SelectList(_context.Produit, "ProduitID", "ProduitID", lignePanier.ProduitID);
             return View(lignePanier);
         }
@@ -138,7 +165,6 @@ namespace mvc_gog.Controllers
             }
 
             var lignePanier = await _context.LignePanier
-                .Include(l => l.panier)
                 .Include(l => l.produit)
                 .FirstOrDefaultAsync(m => m.LignePanierID == id);
             if (lignePanier == null)
@@ -161,7 +187,32 @@ namespace mvc_gog.Controllers
             var lignePanier = await _context.LignePanier.FindAsync(id);
             if (lignePanier != null)
             {
+
+
+
+
+
+                /////////////////////////////////////////////////
                 _context.LignePanier.Remove(lignePanier);
+                await _context.SaveChangesAsync();
+               
+                Panier panier = _context.Panier.Include(p => p.LignePanier).FirstOrDefault(lp => lp.PanierID == lignePanier.PanierID);
+
+                panier.NbreArticle = panier.LignePanier.Sum(p => p.NbreArticle);
+                panier.Total = panier.LignePanier.Sum(p => p.Total);
+
+                _context.Update(panier);
+                await _context.SaveChangesAsync();
+
+
+                if (_context.LignePanier == null)
+                {
+                    _context.Panier.RemoveRange(_context.Panier);
+                    await _context.SaveChangesAsync();
+                }
+
+                /////////////////////////////////////////////////
+
             }
             
             await _context.SaveChangesAsync();

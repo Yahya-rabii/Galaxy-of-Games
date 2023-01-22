@@ -43,7 +43,11 @@
     }
 
 .form-control {
-    border-width: 2.3px;
+    /*border-radius: 25px;  Change as desired */
+    border-width: 1px; /* Change as desired */
+    margin-top: 10px; /* Change as desired */
+
+
 }
 
 .form-group label {
@@ -52,12 +56,14 @@
 
 .btn.btn-block {
     padding: 12px 1px;
+    margin-top: 10px; 
 }
 
 
 
 @media screen and (max-width: 425px) {
     .card-wrapper {
+        
         width: 90%;
         margin: 0 auto;
     }
@@ -86,8 +92,55 @@
 
 
 
+.LOGOUTbtns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Change as desired */
+    margin-bottom: 20px; /* Change as desired */
+}
 
-.LOGOUTbtns button {
+    .LOGOUTbtns button {
+        margin-top: 0px; /* Change as desired */
+        margin-left: 15px; /* Change as desired */
+        height: 50px;
+        width: 150px;
+        border-radius: 50px;
+        border: 2px solid #3bbee3;
+        font-size: 20px;
+        font-weight: 500;
+        padding: 0 10px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+        color: #38deec;
+        background: transparent;
+    }
+
+    
+    .LOGOUTbtns button:hover {
+        background-image: linear-gradient(to right, #3f8cd6, #38deec);
+        color: #000;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+.LOGINbtns button {
+    display: flex; /* added */
+    justify-content: center; /* added */
+    align-items: center; /* added */
+    margin: 0 auto; /* added */
+
+    margin-top: 30px; /* Change as desired */
     height: 50px;
     width: 150px;
     border-radius: 50px;
@@ -102,8 +155,59 @@
     background: transparent;
 }
 
-    
-    .LOGOUTbtns button:hover {
+
+        .LOGINbtns button:hover {
+            background-image: linear-gradient(to right, #3f8cd6, #38deec);
+            color: #000;
+        }
+
+
+
+
+
+
+.mybtn {
+
+
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 80px;
+    border-radius: 50px;
+    border: 2px none #3bbee3;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #38deec;
+    background: transparent;
+}
+    .mybtn:hover {
+        background-image: linear-gradient(to right, #3f8cd6, #38deec);
+        color: #000;
+    }
+
+
+
+
+.mybtnre {
+    margin-top: 20px; /* Change as desired */
+    height: 30px;
+    width: 90px;
+    border-radius: 50px;
+    border: 2px none #3bbee3;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #38deec;
+    background: transparent;
+    align-items: center;
+}
+
+    .mybtnre:hover {
         background-image: linear-gradient(to right, #3f8cd6, #38deec);
         color: #000;
     }

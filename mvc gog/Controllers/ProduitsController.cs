@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,7 @@ namespace mvc_gog.Controllers
                           Problem("Entity set 'mvc_gogContext.Produit'  is null.");
         }
 
+
         // GET: Produits but for clients
 
         public async Task<IActionResult> List()
@@ -37,7 +39,6 @@ namespace mvc_gog.Controllers
                         View(await _context.Produit.ToListAsync()) :
                         Problem("Entity set 'mvc_gogContext.Produit'  is null.");
         }
-
 
 
         // GET: Produits/Details/5
@@ -69,7 +70,7 @@ namespace mvc_gog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProduitID,imageurl,Prodname,Price,Dateofcreation,Datedeproduction,desc,Autor")] Produit produit)
+        public async Task<IActionResult> Create([Bind("ProduitID,PanierID,imageurl,Prodname,Price,Dateofcreation,desc,Autor")] Produit produit)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +102,7 @@ namespace mvc_gog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProduitID,imageurl,Prodname,Price,Dateofcreation,Datedeproduction,desc,Autor")] Produit produit)
+        public async Task<IActionResult> Edit(int id, [Bind("ProduitID,PanierID,imageurl,Prodname,Price,Dateofcreation,desc,Autor")] Produit produit)
         {
             if (id != produit.ProduitID)
             {
@@ -174,57 +175,78 @@ namespace mvc_gog.Controllers
         }
 
 
-        public async Task<IActionResult> AddPanier(int id, int Quantite)
+
+
+        public async Task<IActionResult> AddToPanier(int id, int Quantite)
         {
+            //GET THE LOGGED IN USER ID 
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-        
-
+            // GET THE PRODUCT FROM DB
             var produit = await _context.Produit.FindAsync(id);
-            var panier = new Panier();
 
-            if (produit != null && Quantite > 0)
+            // check if product exists and the quantity is valid
+            if (produit == null || Quantite <= 0)
             {
-
-               
-                    
-                panier.NbreArticle = Quantite;
-
-                panier.Total = Quantite * (float)produit.Price;
-
-                panier.Produit = id;
-
-                panier.Prdname = produit.Prodname;
-
-                _context.Panier.Update(panier);
-                _context.SaveChanges(); 
-                
-                
-
-                
-
-                    foreach (var tmp in _context.Panier)
-                    {
-
-                        if (tmp.Produit == id && tmp != panier)
-                        {
-                            panier.NbreArticle = panier.NbreArticle + tmp.NbreArticle;
-                            panier.Total = panier.Total + tmp.Total;
-                            panier.Prdname= tmp.Prdname;
-                            _context.Panier.Remove(tmp);
-                            _context.Panier.Update(panier);
-
-                        }
-
-                    }
-                    _context.SaveChanges();
-
-             
-
-
-
+                return RedirectToAction("Index", "Paniers");
             }
+
+            // check if user already has a PANIER
+            var panier = await _context.Panier.Include(p => p.LignePanier).FirstOrDefaultAsync(p => p.User.UserID == userId);
+
+            if (panier == null)
+            {
+                panier = new Panier();
+                var usr =  _context.User.FirstOrDefaultAsync(p => p.UserID == userId);
+                panier.User = usr.Result;
+
+                panier.NbreArticle += Quantite;
+
+                panier.Total += Quantite * (double)produit.Price;
+
+                //create new line item for the PANIER
+                var lignePanier = new LignePanier { ProduitID = produit.ProduitID, NbreArticle = Quantite, Total = Quantite * produit.Price, produit=produit};
+                panier.LignePanier = new List<LignePanier> { lignePanier };
+               
+                _context.Panier.Add(panier);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // check if product is already in the PANIER
+                var existingLignePanier = panier.LignePanier.FirstOrDefault(lp => lp.ProduitID == id);
+
+                if (existingLignePanier != null)
+                {
+                    // update the panier and lignepanier
+                    existingLignePanier.NbreArticle += Quantite;
+                    existingLignePanier.Total += Quantite * (double)produit.Price;
+
+                    panier.NbreArticle += Quantite;
+                    panier.Total += Quantite * (double)produit.Price;
+                    
+                    _context.Update(panier);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    // add new product to the lignepanier
+                    var lignePanier = new LignePanier { ProduitID = produit.ProduitID, NbreArticle = Quantite, Total = Quantite * produit.Price, produit = produit };
+
+
+                    panier.LignePanier.Add(lignePanier);
+
+                    panier.NbreArticle += Quantite;
+                    panier.Total += Quantite * (double)produit.Price;
+                    _context.Update(panier);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
             return RedirectToAction("Index", "Paniers");
         }
+
+
 
     }
 }

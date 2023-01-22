@@ -9,39 +9,34 @@
         <div class="form-holder">
             <div class="form-content">
                 <div class="form-items">
-                                    <h1>DETAILS</h1>
+                    <h1>DETAILS</h1>
                     <hr />
-    <dl class="row">
-        
-        <dt class = "col-sm-10">
-            @Html.DisplayNameFor(model => model.NbreArticle)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NbreArticle)
-        </dd>
-        
-        <dt class = "col-sm-10">
-            @Html.DisplayNameFor(model => model.Prdname)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prdname)
-        </dd>
-        
-        
-        <dt class = "col-sm-10">
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Total)
-        </dd>
+                    <dl class="row">
 
-    </dl>                   
-                    
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.NbreArticle)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.NbreArticle)
+                        </dd>
+
+
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.Total)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.Total)
+                        </dd>
+
+                    </dl>
+
+          
+
                     <a asp-action="Edit" asp-route-id="@Model?.PanierID" class="btn btn-warning">Edit</a> |
                     <a asp-action="Index"><input type="button" class="btn btn-dark" value="Back to List" /></a>
-</div>
-</div>
-</div>
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

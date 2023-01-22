@@ -40,12 +40,12 @@ namespace mvc_gog.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+                 var user = await _context.User
                 .FirstOrDefaultAsync(m => m.UserID == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+                if (user == null)
+                {
+                    return NotFound();
+                }
 
             return View(user);
         }
@@ -63,13 +63,59 @@ namespace mvc_gog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserID,Email,Password,FirstName,LastName,IsAdmin,BirthDate")] User user)
         {
+
+
+
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                // Hash the password before saving to the database
+                // you can use a library like BCrypt or Argon2 to hash the password
+                if (user != null)
+                {
+
+
+                    var preregisteredUser = _context.User.FirstOrDefault(u => u.Email == user.Email);
+
+
+                    if (preregisteredUser != null)
+                    {
+
+                        ModelState.AddModelError("", "user already exist");
+                        return RedirectToAction("Register", "Users");
+
+                    }
+                    else
+                    {
+
+                        user.Password = HashPassword(user?.Password);
+
+                        _context.Add(user);
+                        await _context.SaveChangesAsync();
+
+                        // Redirect to the login page after registration
+                        return RedirectToAction("Login");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Register");
+                }
+
             }
+          
             return View(user);
+
+
+
+
+
+
+
+            /////////////////////////////////////////////////////////
+
+
+
         }
 
         // GET: Users/Edit/5
@@ -168,6 +214,8 @@ namespace mvc_gog.Controllers
 
 
 
+
+
         /////////////////////////////////////////////////////////////////////
 
 
@@ -182,10 +230,10 @@ namespace mvc_gog.Controllers
 
 
 
-		// POST: User/Register
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Register([Bind("UserID,Email,Password,FirstName,LastName,IsAdmin,BirthDate")] User user)
+        // POST: User/Register
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([Bind("UserID,Email,Password,FirstName,LastName,IsAdmin,BirthDate")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -194,19 +242,35 @@ namespace mvc_gog.Controllers
                 // you can use a library like BCrypt or Argon2 to hash the password
                 if (user != null)
                 {
-                    user.Password = HashPassword(user?.Password);
 
-                    _context.Add(user);
-                    await _context.SaveChangesAsync();
 
-                    // Redirect to the login page after registration
-                    return RedirectToAction("Login");
+                    var preregisteredUser = _context.User.FindAsync(user.Email);
+
+
+                    if (preregisteredUser != null)
+                    {
+
+                        ModelState.AddModelError("", "user already exist");
+                        return RedirectToAction("Register", "Users");
+
+                    }
+                    else
+                    {
+
+                        user.Password = HashPassword(user?.Password);
+
+                        _context.Add(user);
+                        await _context.SaveChangesAsync();
+
+                        // Redirect to the login page after registration
+                        return RedirectToAction("Login");
+                    }
                 }
                 else
                 {
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Register");
                 }
-               
+
             }
             else
             {
@@ -236,18 +300,25 @@ namespace mvc_gog.Controllers
 
 
 
-            if (email != null && password != null) {
-                    var registeredUser = _context.User.FirstOrDefault(u => u.Email == email);
-                    var x = BCrypt.Net.BCrypt.Verify(password, registeredUser?.Password);
-                    var claims = new List<Claim>();
-                    var claimsIdentity = new ClaimsIdentity();
-                if (registeredUser != null && x) {
+            if (email != null && password != null)
+            {
+                var registeredUser = _context.User.FirstOrDefault(u => u.Email == email);
+                var x = false;
 
-                    if (registeredUser.IsAdmin) {
+                if (registeredUser != null) x = BCrypt.Net.BCrypt.Verify(password, registeredUser?.Password);
 
-                        claims = new List<Claim> { new Claim(ClaimTypes.Role, "admin") };
+                var claims = new List<Claim>();
+                var claimsIdentity = new ClaimsIdentity();
 
-                        claimsIdentity = new ClaimsIdentity(claims, "Login");
+                if (registeredUser != null && x)
+                {
+
+                    if (registeredUser.IsAdmin)
+                    {
+
+                        claims = new List<Claim> { new Claim(ClaimTypes.Role, "admin"), new Claim(ClaimTypes.NameIdentifier, registeredUser.UserID.ToString()) };
+
+                        claimsIdentity = new ClaimsIdentity(claims, "Cookie");
 
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
@@ -261,9 +332,9 @@ namespace mvc_gog.Controllers
                         // Log the user in
                         // you can create a session or a cookie here to keep the user logged in
 
-                        claims = new List<Claim> { new Claim(ClaimTypes.Role, "user") };
+                        claims = new List<Claim> { new Claim(ClaimTypes.Role, "user"), new Claim(ClaimTypes.NameIdentifier, registeredUser.UserID.ToString()) };
 
-                        claimsIdentity = new ClaimsIdentity(claims, "Login");
+                        claimsIdentity = new ClaimsIdentity(claims, "Cookie");
 
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                         // Redirect to the home page
@@ -273,7 +344,7 @@ namespace mvc_gog.Controllers
 
 
                 }
-                
+
                 else
                 {
                     // Invalid credentials
@@ -281,7 +352,7 @@ namespace mvc_gog.Controllers
                     return RedirectToAction("Login", "Users");
 
                 }
-            
+
             }
 
             else return RedirectToAction("Login", "Users");
@@ -298,9 +369,6 @@ namespace mvc_gog.Controllers
 
         public async Task<IActionResult> Logout()
         {
-
-
-
 
             // Sign out the user
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -336,7 +404,6 @@ namespace mvc_gog.Controllers
 
 
         /////////////////////////////////////////////////////////////////////
-
 
 
 

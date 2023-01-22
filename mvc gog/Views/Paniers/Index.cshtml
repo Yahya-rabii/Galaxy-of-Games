@@ -1,67 +1,192 @@
-﻿@model IEnumerable<mvc_gog.Models.Panier>
+﻿@model CartViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
+@if (User.IsInRole("admin"))
+{
 
 
-<div class="form-body">
-    <div class="row">
-        <div class="form-holder">
-            <div class="form-content">
-                <div class="form-items">
-                    <h1>CARTS</h1>
-                    <hr/>
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h1>CARTS</h1>
+                        <hr />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NbreArticle)
-            </th> 
-            <th>
-                @Html.DisplayNameFor(model => model.Prdname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NbreArticle)
-            </td>  
-            <td>
-                @Html.DisplayFor(modelItem => item.Prdname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>User Name</th>
+                                    <th></th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var panier in Model.Paniers)
+                                {
+
+                                    if (panier.Total > 0)
+                                    {
+                                        int x = 0;
+
+                                            <td>@panier.User.UserID</td>
+
+                                            <td>@panier.User.FirstName @panier.User.LastName </td>
+
+                                            @foreach (var item in Model.LignePaniers)
+                                            {
+                                                if (item != null && item.PanierID == panier.PanierID )
+                                                {
+                                                    if(x==0){
+                                                    <td></td>
+                                                    <td>@item.produit?.Prodname</td>
+                                                    <td>@item.NbreArticle</td>
+                                                    <td>@item.Total</td>
+
+                                                    <td>
+
+                                                        <a asp-action="Edit" asp-route-id="@item.LignePanierID"> <input type="submit" value="Edit" class="btn btn-warning" /></a> |
+                                                        <a asp-action="Details" asp-route-id="@item.LignePanierID"> <input type="button" class="btn btn-primary" value="Details"></a> |
+                                                        <a asp-action="Delete" asp-route-id="@item.LignePanierID"> <input type="button" class="btn btn-danger" value="Delete"></a>
+                                                        </td>
+                                                        x++;
+                                                    }
+                                                    else
+                                                    {  
+                                                        <td/>
+                                                        <tr ></tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+
+                                                        <td>@item.produit?.Prodname</td>
+                                                        <td>@item.NbreArticle</td>
+                                                        <td>@item.Total</td>
+
+                                                        <td>
+
+                                                            <a asp-action="Edit" asp-route-id="@item.LignePanierID"> <input type="submit" value="Edit" class="btn btn-warning" /></a> |
+                                                            <a asp-action="Details" asp-route-id="@item.LignePanierID"> <input type="button" class="btn btn-primary" value="Details"></a> |
+                                                            <a asp-action="Delete" asp-route-id="@item.LignePanierID"> <input type="button" class="btn btn-danger" value="Delete"></a>
+                                                        </td>
+
+                                                        </tr>
+
+                                                    }
+
+                                                }
+                                            }
 
 
+                                    <tr style="border-bottom:hidden">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:center; border:dashed white;">Total:  @panier.Total</td>
+                                       
+                              
+                                        <td></td>
+
+                                     </tr>
+
+                                    <tr style="height: 50px"></tr>
 
 
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                  <a asp-action="Edit" asp-route-id="@item.PanierID"> <input type="submit" value="Edit" class="btn btn-warning" /></a> |
-                                        <a asp-action="Details" asp-route-id="@item.PanierID"> <input type="button" class="btn btn-primary" value="Details"></a> |
-                                        <a asp-action="Delete" asp-route-id="@item.PanierID"> <input type="button" class="btn btn-danger" value="Delete"></a> 
-
-
-
-            </td>
-        </tr>
 }
-    </tbody>
-</table>
 
+
+else
+{
+
+
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h1>CARTS</h1>
+                        <hr />
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var panier in Model.Paniers)
+                                {
+
+                                    @foreach (var item in Model.LignePaniers)
+                                    {
+                                        if (item != null && item.PanierID == panier.PanierID)
+                                        {
+
+                                            <tr>
+                                                <td>@item.produit?.Prodname</td>
+                                                <td>@item.NbreArticle</td>
+                                                <td>@item.Total</td>
+
+                                                <td>
+
+                                                    <a asp-action="Edit" asp-route-id="@item.LignePanierID"> <input type="submit" value="Edit" class="btn btn-warning" /></a> |
+                                                    <a asp-action="Details" asp-route-id="@item.LignePanierID"> <input type="button" class="btn btn-primary" value="Details"></a> |
+                                                    <a asp-action="Delete" asp-route-id="@item.LignePanierID"> <input type="button" class="btn btn-danger" value="Delete"></a>
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+
+                                    <tr>
+                                        <td>Total:</td>
+                                        <td></td>
+                                        <td>@panier.Total</td>
+
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                
+            </div>
+        </div>
+    </div>
+
+
+
+
+}
+
+
+
+
+
+  
+
+

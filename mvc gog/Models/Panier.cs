@@ -7,11 +7,9 @@ namespace mvc_gog.Models
 
         public int NbreArticle { get; set; }
 
-        public string? Prdname { get; set; }
-        public int Produit { get; set; }
-
         public double Total { get; set; }
-             
+        public User? User { get; set; }
+
         public ICollection<LignePanier>? LignePanier { get; set; }
 
     }

@@ -6,45 +6,44 @@
 
 
 
-        @foreach (var item in Model)
-        {
+@foreach (var item in Model)
+{
 
-           <div class="hero-container">
-                    <div class="main-container">
-                        <div class="poster-container">
-                            <a href="#"><img src=@Html.DisplayFor(modelItem => item.imageurl) class="poster" /></a>
-                        </div>
-                        <div class="ticket-container">
-                            <div class="ticket__content">
-                                <h4 class="ticket__movie-title">@Html.DisplayFor(modelItem => item.Prodname)</h4>
-                                <p class="ticket__movie-descreption">
-                                    @Html.DisplayFor(modelItem => item.desc)
-                                </p>
-                                <p class="ticket__current-price">@Html.DisplayFor(modelItem => item.Price) $</p>
-                                <p class="ticket__author">made by : @Html.DisplayFor(modelItem => item.Autor)</p>
-                                <p class="ticket__date-crea">@Html.DisplayFor(modelItem => item.Dateofcreation)</p>
-
-
-
-
-
-
-                    <form asp-route-id="@item.ProduitID" method="get" asp-action="AddPanier" >
-                        <input class="form-control bg-transparent text-light" type="number" name="Quantite" placeholder="Quantite" value="1" min="1">
-                        <br/>
-                        
-                        <button class="ticket__buy-btn" type="submit">Add to cart</button>
-                                          
-                                                
-                                            </form>
-
-                        
-
-
-                            </div>
-                        </div>
-                    </div>
+    <div class="hero-container">
+        <div class="main-container">
+            <div class="poster-container">
+                <a href="#"><img src=@Html.DisplayFor(modelItem => item.imageurl) class="poster" /></a>
             </div>
-            
-        }
+            <div class="ticket-container">
+                <div class="ticket__content">
+                    <h4 class="ticket__movie-title">@Html.DisplayFor(modelItem => item.Prodname)</h4>
+                    <p class="ticket__movie-descreption">
+                        @Html.DisplayFor(modelItem => item.desc)
+                    </p>
+                    <p class="ticket__current-price">@Html.DisplayFor(modelItem => item.Price) $</p>
+                    <p class="ticket__author">made by : @Html.DisplayFor(modelItem => item.Autor)</p>
+                    <p class="ticket__date-crea">@Html.DisplayFor(modelItem => item.Dateofcreation)</p>
 
+
+
+
+
+
+                    <form asp-route-id="@item.ProduitID" method="get" asp-action="AddToPanier">
+                        <input class="form-control bg-transparent text-light" type="number" name="Quantite" placeholder="Quantite" value="1" min="1">
+                        <br />
+
+                        <button class="ticket__buy-btn" type="submit">Add to cart</button>
+
+
+                    </form>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

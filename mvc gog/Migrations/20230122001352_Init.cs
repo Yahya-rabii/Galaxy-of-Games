@@ -12,32 +12,16 @@ namespace mvcgog.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Panier",
-                columns: table => new
-                {
-                    PanierID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NbreArticle = table.Column<int>(type: "int", nullable: false),
-                    Prdname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Produit = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Panier", x => x.PanierID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Produit",
                 columns: table => new
                 {
                     ProduitID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    PanierID = table.Column<int>(type: "int", nullable: false),
                     imageurl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Prodname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<float>(type: "real", nullable: false),
                     Dateofcreation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Datedeproduction = table.Column<DateTime>(type: "datetime2", nullable: false),
                     desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Autor = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -65,6 +49,26 @@ namespace mvcgog.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Panier",
+                columns: table => new
+                {
+                    PanierID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NbreArticle = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<double>(type: "float", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Panier", x => x.PanierID);
+                    table.ForeignKey(
+                        name: "FK_Panier_User_UserID",
+                        column: x => x.UserID,
+                        principalTable: "User",
+                        principalColumn: "UserID");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LignePanier",
                 columns: table => new
                 {
@@ -72,7 +76,8 @@ namespace mvcgog.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PanierID = table.Column<int>(type: "int", nullable: false),
                     ProduitID = table.Column<int>(type: "int", nullable: false),
-                    Qte = table.Column<int>(type: "int", nullable: false)
+                    NbreArticle = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,12 +88,6 @@ namespace mvcgog.Migrations
                         principalTable: "Panier",
                         principalColumn: "PanierID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_LignePanier_Produit_ProduitID",
-                        column: x => x.ProduitID,
-                        principalTable: "Produit",
-                        principalColumn: "ProduitID",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -97,9 +96,9 @@ namespace mvcgog.Migrations
                 column: "PanierID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LignePanier_ProduitID",
-                table: "LignePanier",
-                column: "ProduitID");
+                name: "IX_Panier_UserID",
+                table: "Panier",
+                column: "UserID");
         }
 
         /// <inheritdoc />
@@ -109,13 +108,13 @@ namespace mvcgog.Migrations
                 name: "LignePanier");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Produit");
 
             migrationBuilder.DropTable(
                 name: "Panier");
 
             migrationBuilder.DropTable(
-                name: "Produit");
+                name: "User");
         }
     }
 }

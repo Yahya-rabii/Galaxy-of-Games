@@ -55,14 +55,14 @@ app.UseAuthorization();
 
 app.Use(async (context, next) =>
 {
-    if (!context.User.Identity.IsAuthenticated && context.Request.Path.Value != "/Users/Login")
+    if (!context.User.Identity.IsAuthenticated && context.Request.Path.Value != "/Users/Login" && context.Request.Path.Value != "/Users/Register")
     {
         context.Response.Redirect("/Users/Login");
     }
     else if (context.User.Identity.IsAuthenticated && context.User.IsInRole("admin") && context.Request.Path.Value == "/Users/Login")
     {
         context.Response.Redirect("/");
-    }  
+    }
     else if (context.User.Identity.IsAuthenticated && context.User.IsInRole("user") && context.Request.Path.Value == "/Users/Login")
     {
         context.Response.Redirect("/Produits/List");
