@@ -1,5 +1,5 @@
 # Galaxy-of-Games E-commerce website &#128722;
-*A full stack academic project using *ASP.Net core 7 with the <b>MVC</b> model* (<b>M</b>odels, <b>V</b>iews, <b>C</b>ontrollers) using a *Local SQL* database server. 
+*A full stack academic project using *ASP.Net core 7 with the <b>MVC</b> model* (<b>M</b>odels, <b>V</b>iews, <b>C</b>ontrollers) using a *SQL server* database . 
 </br></br></br>
 <img style="display: block; margin-left: auto; margin-right: auto; width: 80%" src="https://www.ryadel.com/wp-content/uploads/2016/02/logo-aspnetmvc.png">
 </br></br></br>
