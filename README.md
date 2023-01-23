@@ -1,7 +1,7 @@
 # Galaxy-of-Games E-commerce website &#128722;
-*A full stack academic project using *ASP.Net core 7 with the <b>MVC</b> model* (<b>M</b>odels, <b>V</b>iews, <b>C</b>ontrollers) using a *SQL server* database . 
+*A full stack academic project using *ASP.Net core 7 with the <b>MVC</b> model* (<b>M</b>odels, <b>V</b>iews, <b>C</b>ontrollers) using an *SQL server* database . 
 </br></br></br>
-<img style="display: block; margin-left: auto; margin-right: auto; width: 80%" src="https://www.ryadel.com/wp-content/uploads/2016/02/logo-aspnetmvc.png">
+<center><img style="display: block; margin-left: auto; margin-right: auto; width: 80%" src="https://www.ryadel.com/wp-content/uploads/2016/02/logo-aspnetmvc.png"></center>
 </br></br></br>
 ## &#9881;&#65039;*Installation:
 -Either install the Zip file and extract it. (Opt: using `WinRAR` or `7Zip`)</br></br>
