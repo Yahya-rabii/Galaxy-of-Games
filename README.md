@@ -11,7 +11,7 @@
 2-Make sure you have the right Nugets packages installed (Usually the Visual Studio IDE provides the packages automatically.) </br></br>
 3-Make sure to <b>DELETE</b> the `Migrations` folder located in the `Solution explorer` , as well as the `Tables` in the local Database : </br></br>
 Go to : ```SQL Server Object Explorer -> the (localdb) -> Database -> "mvc_gog.Data" -> Tables -> Delete all 5 tables.``` </br></br>
-4-once done, open the *Package Manager Console*, then insert these commands in order: </br></br>
+4-Once done, open the *Package Manager Console*, then insert these commands in order: </br></br>
 | Command | Description |
 | --- | --- |
 | ```> ADD-MIGRATION {migrationname}``` | Creates a new Migration for the project which applies changes to the database schema in a consistent and versioned manner. |
