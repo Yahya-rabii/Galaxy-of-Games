@@ -1,8 +1,8 @@
 # Galaxy-of-Games E-commerce website &#128722;
-*A full stack academic project using *ASP.Net core 7 with the <b>MVC</b> model* (<b>M</b>odels, <b>V</b>iews, <b>C</b>ontrollers) using an *SQL server* database . 
-</br></br></br>
-<center><img style="display: block; width: 100%" src="https://www.ryadel.com/wp-content/uploads/2016/02/logo-aspnetmvc.png"></center>
-</br></br></br>
+*A full stack academic project using *ASP.Net core 7 with the <b>MVC</b> model* (<b>M</b>odels, <b>V</b>iews, <b>C</b>ontrollers) using an *SQL* server database. 
+</br></br>
+<img style="display: block; margin-left: auto; margin-right: auto; width: 100%" src="https://www.ryadel.com/wp-content/uploads/2016/02/logo-aspnetmvc.png">
+</br>
 ## &#9881;&#65039;*Installation:
 -Either install the Zip file and extract it. (Opt: using `WinRAR` or `7Zip`)</br></br>
 -<b>Or</b> use the command through a <b>Terminal</b> with <b>*GIT*</b> installed in your device : ```GIT CLONE https://github.com/Yahya-rabii/Galaxy-of-Games.git ```
