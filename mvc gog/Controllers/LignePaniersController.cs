@@ -112,29 +112,29 @@ namespace mvc_gog.Controllers
                     if (existingLignePanier is null) return NotFound();
 
 
-                            existingLignePanier.NbreArticle = lignePanier.NbreArticle;
-                            existingLignePanier.Total = lignePanier.NbreArticle * existingLignePanier.produit.Price;
+                    existingLignePanier.NbreArticle = lignePanier.NbreArticle;
+                    existingLignePanier.Total = lignePanier.NbreArticle * existingLignePanier.produit.Price;
 
 
 
 
-                            Panier panier = _context.Panier.Include(p=>p.LignePanier).FirstOrDefault(lp => lp.PanierID == existingLignePanier.PanierID);
+                    Panier panier = _context.Panier.Include(p => p.LignePanier).FirstOrDefault(lp => lp.PanierID == existingLignePanier.PanierID);
 
 
 
-                            panier.NbreArticle = panier.LignePanier.Sum(p => p.NbreArticle);
-                            panier.Total = panier.LignePanier.Sum(p => p.Total);
-
-                           
+                    panier.NbreArticle = panier.LignePanier.Sum(p => p.NbreArticle);
+                    panier.Total = panier.LignePanier.Sum(p => p.Total);
 
 
 
-                            _context.Update(existingLignePanier);
-                            _context.Update(panier);
 
-                            await _context.SaveChangesAsync();
-                        
-                    
+
+                    _context.Update(existingLignePanier);
+                    _context.Update(panier);
+
+                    await _context.SaveChangesAsync();
+
+
                 }
 
 
@@ -150,7 +150,9 @@ namespace mvc_gog.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Paniers", new { id = lignePanier.LignePanierID });
+
             }
             ViewData["ProduitID"] = new SelectList(_context.Produit, "ProduitID", "ProduitID", lignePanier.ProduitID);
             return View(lignePanier);
@@ -195,7 +197,7 @@ namespace mvc_gog.Controllers
                 /////////////////////////////////////////////////
                 _context.LignePanier.Remove(lignePanier);
                 await _context.SaveChangesAsync();
-               
+
                 Panier panier = _context.Panier.Include(p => p.LignePanier).FirstOrDefault(lp => lp.PanierID == lignePanier.PanierID);
 
                 panier.NbreArticle = panier.LignePanier.Sum(p => p.NbreArticle);
@@ -214,14 +216,15 @@ namespace mvc_gog.Controllers
                 /////////////////////////////////////////////////
 
             }
-            
+
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Paniers", new { id = lignePanier.LignePanierID });
+
         }
 
         private bool LignePanierExists(int id)
         {
-          return (_context.LignePanier?.Any(e => e.LignePanierID == id)).GetValueOrDefault();
+            return (_context.LignePanier?.Any(e => e.LignePanierID == id)).GetValueOrDefault();
         }
     }
 }

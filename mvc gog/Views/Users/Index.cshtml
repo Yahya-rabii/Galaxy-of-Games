@@ -4,20 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h1>Users</h1>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -40,9 +40,6 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
@@ -55,11 +52,18 @@
                 @Html.DisplayFor(modelItem => item.BirthDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UserID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserID">Delete</a>
+                  <a asp-action="Edit" asp-route-id="@item.UserID"> <input type="submit" value="Edit" class="btn btn-warning" /></a> |
+                                        <a asp-action="Details" asp-route-id="@item.UserID"> <input type="button" class="btn btn-primary" value="Details"></a> |
+                                        <a asp-action="Delete" asp-route-id="@item.UserID"> <input type="button" class="btn btn-danger" value="Delete"></a> |
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

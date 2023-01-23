@@ -150,6 +150,13 @@ namespace mvc_gog.Controllers
             {
                 try
                 {
+
+
+
+
+                    user.Password = HashPassword(user?.Password);
+       
+
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
@@ -197,8 +204,17 @@ namespace mvc_gog.Controllers
                 return Problem("Entity set 'mvc_gogContext.User'  is null.");
             }
             var user = await _context.User.FindAsync(id);
-            if (user != null)
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            if (user != null && user.UserID != userId)
             {
+
+                var paniers = _context.Panier.Where(p => p.User.UserID == user.UserID);
+                foreach (var panier in paniers)
+                {
+                    _context.Panier.Remove(panier);
+                }
+
                 _context.User.Remove(user);
             }
             
@@ -244,7 +260,7 @@ namespace mvc_gog.Controllers
                 {
 
 
-                    var preregisteredUser = _context.User.FindAsync(user.Email);
+                    var preregisteredUser = _context.User.FirstOrDefault(u=>u.Email == user.Email);
 
 
                     if (preregisteredUser != null)
